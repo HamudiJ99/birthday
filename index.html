@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Hatice!</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div id="sound-icon" class="sound-icon">🎵</div>
+        <div id="game-icon" class="game-icon">🎲</div>
+            <div id="game-popup" class="game-popup" style="display:none;">
+                <div class="game-popup-content">
+                    <span id="close-popup" class="close-popup">❌</span>
+                    <div id="game-start-info">
+                        <h2 class="game-title">Catch 25 Mangos to get your Gift<br><span style="font-size:0.7em;">(Avoid the Job Application)</span></h2>
+                        <button id="start-game-btn" class="game-btn">Play</button>
+                    </div>
+                    <div id="game-area" style="display:none;"></div>
+                </div>
+            </div>
+        <audio id="birthday-audio" src="hb.mp3" loop></audio>
+        <h1 class="birthday-title">Happy Birthday, Hatice!</h1>
+        <canvas id="confetti-canvas"></canvas>
+        <div class="party-effects"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
