@@ -108,7 +108,7 @@ startGameBtn.addEventListener('click', () => {
 function startCatchGame() {
     gameArea.innerHTML = '';
     // Spielvariablen
-    let score = 25;
+    let score = 2;
     let lives = 3;
     let gameOver = false;
     let playerX = 120;
@@ -245,6 +245,9 @@ function startCatchGame() {
     function endGame(win, msg) {
         gameOver = true;
         cancelAnimationFrame(animationId);
+        if (win) {
+            triggerPopupConfetti();
+        }
         setTimeout(() => {
             let imgHtml = '';
             if (!win) {
@@ -258,6 +261,64 @@ function startCatchGame() {
             gameArea.innerHTML = `<div style="font-size:2em;color:#ff69b4;text-shadow:0 0 20px #ffe066;">${imgHtml}${mainText}<br>${msg ? msg : ''}<br><button class='game-btn small-btn' id='restart-btn'>Play Again</button></div>`;
             document.getElementById('restart-btn').onclick = () => startCatchGame();
         }, 800);
+
+
+// Konfetti-Effekt im Popup bei Gewinn
+function triggerPopupConfetti() {
+    const popupCanvas = document.getElementById('popup-confetti-canvas');
+    if (!popupCanvas) return;
+    // Setze die Größe auf die der Popup-Box
+    const popupBox = popupCanvas.parentElement;
+    popupCanvas.width = popupBox.offsetWidth;
+    popupCanvas.height = popupBox.offsetHeight;
+    popupCanvas.style.display = 'block';
+    const ctx = popupCanvas.getContext('2d');
+    const popupConfetti = [];
+    for (let i = 0; i < 80; i++) {
+        popupConfetti.push({
+            x: Math.random() * popupCanvas.width,
+            y: -10,
+            r: Math.random() * 8 + 4,
+            d: Math.random() * 3 + 2,
+            color: colors[Math.floor(Math.random() * colors.length)],
+            tilt: Math.random() * 10 - 5,
+            tiltAngle: 0,
+            tiltAngleIncrement: Math.random() * 0.07 + 0.05
+        });
+    }
+    let frames = 0;
+    function drawPopupConfetti() {
+        ctx.clearRect(0, 0, popupCanvas.width, popupCanvas.height);
+        popupConfetti.forEach(c => {
+            ctx.beginPath();
+            ctx.arc(c.x, c.y, c.r, 0, Math.PI * 2);
+            ctx.fillStyle = c.color;
+            ctx.fill();
+        });
+    }
+    function updatePopupConfetti() {
+        popupConfetti.forEach(c => {
+            c.y += c.d;
+            c.x += Math.sin(c.tiltAngle) * 2;
+            c.tiltAngle += c.tiltAngleIncrement;
+            if (c.y > popupCanvas.height) {
+                c.y = -10;
+                c.x = Math.random() * popupCanvas.width;
+            }
+        });
+    }
+    function animatePopupConfetti() {
+        drawPopupConfetti();
+        updatePopupConfetti();
+        frames++;
+        if (frames < 120) {
+            requestAnimationFrame(animatePopupConfetti);
+        } else {
+            popupCanvas.style.display = 'none';
+        }
+    }
+    animatePopupConfetti();
+}
     }
 
     // Steuerung
