@@ -7,7 +7,9 @@ body {
     justify-content: center;
     align-items: center;
     overflow: hidden;
-    font-family: 'Comic Sans MS', cursive, sans-serif;
+    font-family: 'Inter', Arial, sans-serif;
+    letter-spacing: 0.01em;
+    font-size: 18px;
 }
 
 .sound-icon {
@@ -18,7 +20,13 @@ body {
     color: #fff;
     background: rgba(255, 105, 180, 0.7);
     border-radius: 50%;
-    padding: 20px;
+    aspect-ratio: 1/1;
+    width: 80px;
+    height: 80px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     box-shadow: 0 0 20px #ff69b4, 0 0 40px #ffe066;
     cursor: pointer;
     z-index: 10;
@@ -33,7 +41,13 @@ body {
     color: #fff;
     background: linear-gradient(135deg, #8fd3f4, #ff69b4, #ffe066, #c1f7c7);
     border-radius: 50%;
-    padding: 20px;
+    aspect-ratio: 1/1;
+    width: 80px;
+    height: 80px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     box-shadow: 0 0 20px #8fd3f4, 0 0 40px #ffe066;
     cursor: pointer;
     z-index: 10;
@@ -83,13 +97,21 @@ body {
 
 .close-popup {
     position: absolute;
-    top: 18px;
-    right: 24px;
-    font-size: 2em;
+    top: 10px;
+    right: 10px;
+    font-size: 2.2em;
     color: #fff;
     cursor: pointer;
     z-index: 10001;
     transition: transform 0.2s;
+    background: rgba(0,0,0,0.12);
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px #0002;
 }
 .close-popup:hover {
     transform: scale(1.2);
@@ -98,37 +120,54 @@ body {
 
 @media (max-width: 600px) {
     .game-popup-content {
-        min-width: 90vw;
+        min-width: 98vw;
         min-height: 60vw;
-        padding: 24px 8px;
-        border-radius: 20px;
+        padding: 12px 2vw;
+        border-radius: 16px;
     }
     .game-title {
-        font-size: 1.2em;
+        font-size: 1.1em;
+        letter-spacing: 0.01em;
     }
     .game-btn {
-        font-size: 1.2em;
-        padding: 12px 24px;
+        font-size: 1.1em;
+        padding: 10px 18px;
     }
     .sound-icon, .game-icon {
-        font-size: 2.2em;
-        padding: 12px;
-        right: 12px;
+        font-size: 2em;
+        width: 54px;
+        height: 54px;
+        right: 8px;
+        top: 12px;
+        margin: 0;
+    }
+    .game-icon {
+        top: 80px;
+    }
+    .close-popup {
+        width: 36px;
+        height: 36px;
+        font-size: 1.5em;
+        top: 6px;
+        right: 6px;
+    }
+    body {
+        font-size: 15px;
     }
 }
 }
 
 .game-title {
-    font-size: 3em;
+    font-size: 2.2em;
     font-weight: bold;
-    color: #fff;
-    text-shadow: 0 0 40px #ff69b4, 0 0 80px #ffe066, 0 0 30px #8fd3f4;
+    color: #222;
+    text-shadow: 0 0 10px #fff8, 0 0 20px #ffe066;
     margin-bottom: auto;
-    background: linear-gradient(90deg, #ff69b4, #ffe066, #8fd3f4, #c1f7c7);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-fill-color: transparent;
+    background: none;
+    -webkit-background-clip: initial;
+    -webkit-text-fill-color: initial;
+    background-clip: initial;
+    text-fill-color: initial;
 }
 .sound-icon:hover {
     background: rgba(255, 224, 102, 0.8);

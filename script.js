@@ -396,6 +396,15 @@ function createTrail(x, y) {
     }, 400);
 }
 
+
+// Bunter Trail auch für Touch auf mobilen Geräten
 document.addEventListener('mousemove', (e) => {
     createTrail(e.clientX, e.clientY);
+});
+document.addEventListener('touchmove', (e) => {
+    // Für Multitouch: alle Finger
+    for (let i = 0; i < e.touches.length; i++) {
+        const t = e.touches[i];
+        createTrail(t.clientX, t.clientY);
+    }
 });
