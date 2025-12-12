@@ -108,7 +108,7 @@ startGameBtn.addEventListener('click', () => {
 function startCatchGame() {
     gameArea.innerHTML = '';
     // Spielvariablen
-    let score = 2;
+    let score = 25;
     let lives = 3;
     let gameOver = false;
     let playerX = 120;
@@ -249,16 +249,40 @@ function startCatchGame() {
             triggerPopupConfetti();
         }
         setTimeout(() => {
-            let imgHtml = '';
+            let html = '';
             if (!win) {
-                imgHtml = '<img src="sad.png" alt="Sad" style="width:320px;margin-bottom:30px;display:block;margin-left:auto;margin-right:auto;">';
+                html += '<img src="sad.png" alt="Sad" style="width:320px;margin-bottom:30px;display:block;margin-left:auto;margin-right:auto;">';
+                html += '💥 Game Over!';
+                if (msg) html += `<br>${msg}`;
+                html += `<br><button class='game-btn small-btn' id='restart-btn'>Play Again</button>`;
+            } else {
+                html += `<div id="gift-reveal" style="display:flex;flex-direction:column;align-items:center;justify-content:center;">
+                    <span id="big-gift-emoji" style="font-size:5em;cursor:pointer;transition:transform 0.2s;">🎁</span>
+                    <div id="gift-content" style="display:none;margin-top:20px;text-align:center;">
+                        <img src="image.png" alt="Gift" style="max-width:260px;width:90vw;border-radius:18px;box-shadow:0 0 20px #ff69b4,0 0 40px #ffe066;">
+                        <div style="font-size:1.3em;color:#ff69b4;margin-top:16px;font-weight:bold;">You got gifted a gang photo!</div>
+                    </div>
+                </div>`;
+                html += `<div style="margin-top:30px;"><button class='game-btn small-btn' id='restart-btn'>Play Again</button></div>`;
             }
-            let mainText = win ? '🎉 You got your Gift! 🎁' : '💥 Game Over!';
             // Entferne den Titeltext im Game Over/Win Screen
             if (document.querySelector('.game-title')) {
                 document.querySelector('.game-title').style.display = 'none';
             }
-            gameArea.innerHTML = `<div style="font-size:2em;color:#ff69b4;text-shadow:0 0 20px #ffe066;">${imgHtml}${mainText}<br>${msg ? msg : ''}<br><button class='game-btn small-btn' id='restart-btn'>Play Again</button></div>`;
+            gameArea.innerHTML = `<div style="font-size:2em;color:#ff69b4;text-shadow:0 0 20px #ffe066;">${html}</div>`;
+            if (win) {
+                const giftEmoji = document.getElementById('big-gift-emoji');
+                const giftContent = document.getElementById('gift-content');
+                if (giftEmoji && giftContent) {
+                    giftEmoji.addEventListener('click', () => {
+                        giftEmoji.style.transform = 'scale(0.7) rotate(-20deg)';
+                        setTimeout(() => {
+                            giftEmoji.style.display = 'none';
+                            giftContent.style.display = 'block';
+                        }, 350);
+                    });
+                }
+            }
             document.getElementById('restart-btn').onclick = () => startCatchGame();
         }, 800);
 
